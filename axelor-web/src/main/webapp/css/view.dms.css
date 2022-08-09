@@ -437,14 +437,6 @@
   color: #222;
 }
 
-.spreadsheet-item {
-  border: 1px solid #e7e7e7;
-}
-.spreadsheet-item .ui-resizable-s {
-  background-color: #e7e7e7;
-  border-color: #e7e7e7;
-}
-
 .dms-folder-tree i.fa-folder {
   font-size: 18px;
   vertical-align: middle;

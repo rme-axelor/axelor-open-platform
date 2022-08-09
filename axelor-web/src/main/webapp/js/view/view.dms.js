@@ -575,50 +575,60 @@ function DMSFileListCtrl($scope, $element, NavService) {
       $scope.onClose();
     }
     record = record || getSelected();
+
     var view = {
-      action: "$act:dms" + record.id,
-      model: $scope._model,
-      title: record.contentType === "spreadsheet" ? _t("Spreadsheet") : _t("Document"),
-      viewType: "form",
-      views: [{
-        type: "form",
-        width: "large",
+      type: "form",
+      width: "large",
+      items: [{
+        type: "panel",
         items: [{
           type: "panel",
           items: [{
-            type: "panel",
-            items: [{
-              type: "button",
-              title: _t("Save"),
-              icon: "fa-save",
-              onClick: "save",
-              colSpan: "3"
-            }, {
-              type: "button",
-              title: _t("Download"),
-              icon: "fa-download",
-              onClick: "save,action-dms-file-download",
-              colSpan: "3"
-            }]}, {
-            type: "field",
-            name: "content",
-            showTitle: false,
-            widget: record.contentType || "html",
-            colSpan: 12,
-            height: 520
-          }]
+            type: "button",
+            title: _t("Save"),
+            icon: "fa-save",
+            onClick: "save",
+            colSpan: "3"
+          }, {
+            type: "button",
+            title: _t("Download"),
+            icon: "fa-download",
+            onClick: "save,action-dms-file-download",
+            colSpan: "3"
+          }]}, {
+          type: "field",
+          name: "content",
+          showTitle: false,
+          widget: record.contentType || "html",
+          colSpan: 12,
+          height: 520
         }]
-      }],
+      }]
+    };
+
+    if(record.contentType === "spreadsheet") {
+      view = {
+        type: "html",
+        name: 'spreadsheet?id='+record.id,
+      };
+    }
+
+    var tab = {
+      action: "$act:dms" + record.id,
+      model: $scope._model,
+      title: _t("Document"),
+      //viewType: record.contentType === "spreadsheet" ? "html" : "form",
+      views: [view],
       recordId: record.id,
       forceEdit: true,
       params: {
-        'show-toolbar': false
+        'show-toolbar': record.contentType === "spreadsheet" ? true : false
       }
     };
 
-    $scope.$root.openTab(view);
+    $scope.$root.openTab(tab);
     $scope.waitForActions(function () {
-      var formScope = view.$viewScope;
+      var formScope = tab.$viewScope;
       if (formScope) {
         formScope.$on("$destroy", function () {
           if (formScope.record) {

@@ -56,6 +56,10 @@
     </panel>
   </form>
 
+  <form name="dms-spreadsheet-form" title="Spreadsheet" model="com.axelor.dms.db.DMSFile" width="large" canNew="false" canArchive="false" canAttach="false">
+    <panel-include view="dms-file-form" />
+  </form>
+
   <grid name="dms-folder-grid" title="Directories" model="com.axelor.dms.db.DMSFile" edit-icon="false">
     <field name="fileName"/>
   </grid>
