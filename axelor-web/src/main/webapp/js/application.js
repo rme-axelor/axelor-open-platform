@@ -107,7 +107,6 @@
 //= js/form/form.input.select.js
 //= js/form/form.input.progress.js
 //= js/form/form.input.binary.js
-//= js/form/form.input.spreadsheet.js
 
 //= js/form/form.relational.base.js
 //= js/form/form.relational.single.js
